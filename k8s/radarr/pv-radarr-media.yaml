@@ -17,7 +17,7 @@ spec:
     driver: nfs.csi.k8s.io
     # volumeHandle format: {nfs-server-address}#{sub-dir-name}#{share-name}
     # make sure this value is unique for every share in the cluster
-    volumeHandle: 10.10.250.254#/mnt/Tank1/media#lidarrmedia
+    volumeHandle: 10.10.250.254#/mnt/Tank1/media#radarrmedia
     volumeAttributes:
       server: 10.10.250.254
       share: /mnt/Tank1/media
