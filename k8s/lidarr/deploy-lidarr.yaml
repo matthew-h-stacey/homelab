@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lidarr
+  template:
+    metadata:
+      labels:
+        app: lidarr
+    spec:
+      containers:
+      - name: lidarr
+        image: lscr.io/linuxserver/lidarr
+        ports:
+        - containerPort: 8686 # native port for the app to listen on
+        volumeMounts:
+        - name: media # name of a volume to mount
+          mountPath: /media # mount path on the server
+      volumes:
+      - name: media # the name of a volume referenced above
+        persistentVolumeClaim:
+          claimName: pvc-lidarr # pvc to mount to mountPath
