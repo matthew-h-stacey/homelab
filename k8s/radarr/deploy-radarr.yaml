@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr # Name of the deployment
+spec:
+  replicas: 1 # Number of replicas
+  selector:
+    matchLabels:
+      app: radarr # Must match labels in the template section
+  template:
+    metadata:
+      labels:
+        app: radarr # Labels must match selector above
+    spec:
+      containers:
+      - name: radarr # Name of the container
+        image: lscr.io/linuxserver/radarr # Image to use
+        ports:
+        - containerPort: 7878 # Container port for the app
+        volumeMounts:
+        - name: media # Name of the volume to mount
+          mountPath: /media # Mount path inside the container
+        - name: config # Name of the volume to mount
+          mountPath: /config # Mount path inside the container
+      volumes:
+      - name: media # Volume name must match with volumeMounts name
+        persistentVolumeClaim:
+          claimName: pvc-radarr-media # The PVC name must exist
+      - name: config # Volume name must match with volumeMounts name
+        persistentVolumeClaim:
+          claimName: pvc-radarr-config # The PVC name must exist
