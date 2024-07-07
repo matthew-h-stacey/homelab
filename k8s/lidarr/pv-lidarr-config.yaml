@@ -10,7 +10,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: sc-truenas1-config
+  storageClassName: sc-nfs-truenas1-config
   mountOptions:
     - nfsvers=4.1
   csi:

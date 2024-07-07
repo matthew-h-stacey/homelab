@@ -20,14 +20,12 @@ spec:
         volumeMounts:
         - name: media # Name of the volume to mount
           mountPath: /media # Mount path inside the container
-        resources:
-          limits:
-            memory: 512Mi # Memory limit
-            cpu: "1" # CPU limit
-          requests:
-            memory: 256Mi # Memory request
-            cpu: "0.2" # CPU request
+        - name: config # Name of the volume to mount
+          mountPath: /config # Mount path inside the container
       volumes:
       - name: media # Volume name must match with volumeMounts name
         persistentVolumeClaim:
-          claimName: pvc-lidarr # The PVC name must exist
+          claimName: pvc-lidarr-media # The PVC name must exist
+      - name: config # Volume name must match with volumeMounts name
+        persistentVolumeClaim:
+          claimName: pvc-lidarr-config # The PVC name must exist
