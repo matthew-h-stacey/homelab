@@ -1,26 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lidarr
+  name: lidarr # Name of the deployment
 spec:
-  replicas: 1
+  replicas: 1 # Number of replicas
   selector:
     matchLabels:
-      app: lidarr
+      app: lidarr # Must match labels in the template section
   template:
     metadata:
       labels:
-        app: lidarr
+        app: lidarr # Labels must match selector above
     spec:
       containers:
-      - name: lidarr
-        image: lscr.io/linuxserver/lidarr
+      - name: lidarr # Name of the container
+        image: lscr.io/linuxserver/lidarr # Image to use
         ports:
-        - containerPort: 8686 # native port for the app to listen on
+        - containerPort: 8686 # Container port for the app
         volumeMounts:
-        - name: media # name of a volume to mount
-          mountPath: /media # mount path on the server
+        - name: media # Name of the volume to mount
+          mountPath: /media # Mount path inside the container
+        resources:
+          limits:
+            memory: 512Mi # Memory limit
+            cpu: "1" # CPU limit
+          requests:
+            memory: 256Mi # Memory request
+            cpu: "0.2" # CPU request
       volumes:
-      - name: media # the name of a volume referenced above
+      - name: media # Volume name must match with volumeMounts name
         persistentVolumeClaim:
-          claimName: pvc-lidarr # pvc to mount to mountPath
+          claimName: pvc-lidarr # The PVC name must exist
