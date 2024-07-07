@@ -20,4 +20,4 @@ spec:
     volumeHandle: 10.10.250.254#/mnt/Tank1/media#lidarrconfig
     volumeAttributes:
       server: 10.10.250.254
-      share: /mnt/Tank1/k8s/config
+      share: /mnt/Tank1/config
