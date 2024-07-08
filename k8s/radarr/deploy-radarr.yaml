@@ -1,34 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: radarr # Name of the deployment
+  name: radarr
 spec:
-  replicas: 1 # Number of replicas
+  replicas: 1
   selector:
     matchLabels:
-      app: radarr # Must match labels in the template section
+      app: radarr
   template:
     metadata:
       labels:
-        app: radarr # Labels must match selector above
+        app: radarr
     spec:
-      containers:
-      - name: radarr # Name of the container
-        image: lscr.io/linuxserver/radarr # Image to use
-        ports:
-        - containerPort: 7878 # Container port for the app
+      # Add the initContainers section
+      initContainers:
+      - name: init-permissions
+        image: busybox:latest # Use a lightweight image
+        command: ['sh', '-c', 'chown -R 1000:1000 /media && chown -R 1000:1000 /config']
         volumeMounts:
-        - name: media # Name of the volume to mount
-          mountPath: /media # Mount path inside the container
-        - name: config # Name of the volume to mount
-          mountPath: /config # Mount path inside the container
-        securityContext:
-          runAsUser: 1000 # Set the container to run as UID 1000
-          runAsGroup: 1000 # Optional: Set the container to run as GID 1000
+        - name: media
+          mountPath: /media
+        - name: config
+          mountPath: /config
+      containers:
+      - name: radarr
+        image: lscr.io/linuxserver/radarr
+        ports:
+        - containerPort: 7878
+        volumeMounts:
+        - name: media
+          mountPath: /media
+        - name: config
+          mountPath: /config
       volumes:
-      - name: media # Volume name must match with volumeMounts name
+      - name: media
         persistentVolumeClaim:
-          claimName: pvc-radarr-media # The PVC name must exist
-      - name: config # Volume name must match with volumeMounts name
+          claimName: pvc-radarr-media
+      - name: config
         persistentVolumeClaim:
-          claimName: pvc-radarr-config # The PVC name must exist
+          claimName: pvc-radarr-config
