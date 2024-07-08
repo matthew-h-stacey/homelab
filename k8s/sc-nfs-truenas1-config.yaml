@@ -13,3 +13,5 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
+  - uid=1000
+  - gid=1000
