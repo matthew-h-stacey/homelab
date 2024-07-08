@@ -22,6 +22,9 @@ spec:
           mountPath: /media # Mount path inside the container
         - name: config # Name of the volume to mount
           mountPath: /config # Mount path inside the container
+        securityContext:
+          runAsUser: 1000 # Set the container to run as UID 1000
+          runAsGroup: 1000 # Optional: Set the container to run as GID 1000
       volumes:
       - name: media # Volume name must match with volumeMounts name
         persistentVolumeClaim:
