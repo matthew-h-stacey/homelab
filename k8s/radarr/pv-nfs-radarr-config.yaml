@@ -10,7 +10,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: sc-nfs-sonarr-config
+  storageClassName: sc-nfs-radarr-config
   mountOptions:
    - nfsvers=4.1
   csi:
