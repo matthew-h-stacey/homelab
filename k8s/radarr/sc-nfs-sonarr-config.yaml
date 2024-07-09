@@ -1,11 +1,11 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: sc-nfs-truenas1-config
+  name: sc-nfs-radarr-config
 provisioner: nfs.csi.k8s.io
 parameters:
   server: 10.10.250.254
-  share: /mnt/Tank1/config
+  share: /mnt/Tank1/config/radarr
   # csi.storage.k8s.io/provisioner-secret is only needed for providing mountOptions in DeleteVolume
   # csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   # csi.storage.k8s.io/provisioner-secret-namespace: "default"
@@ -13,5 +13,3 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
-  - uid=1000
-  - gid=1000

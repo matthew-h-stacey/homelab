@@ -8,5 +8,5 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  volumeName: pv-nfs-config-radarr
-  storageClassName: sc-nfs-truenas1-config
+  volumeName: pv-nfs-radarr-config
+  storageClassName: sc-nfs-radarr-config
