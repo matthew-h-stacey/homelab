@@ -4,7 +4,6 @@ metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: nfs.csi.k8s.io
   name: pv-nfs-radarr-movies
-  namespace: radarr
 spec:
   capacity:
     storage: 10Gi
