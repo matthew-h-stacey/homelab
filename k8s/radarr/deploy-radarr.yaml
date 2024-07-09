@@ -36,7 +36,7 @@ spec:
       volumes:
       - name: movies
         persistentVolumeClaim:
-          claimName: pvc-radarr-movies
+          claimName: pvc-nfs-radarr-movies
       - name: config
         persistentVolumeClaim:
-          claimName: pvc-radarr-config
+          claimName: pvc-nfs-radarr-config
