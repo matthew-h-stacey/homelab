@@ -2,6 +2,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: sc-nfs-radarr-movies
+  namespace: radarr
 provisioner: nfs.csi.k8s.io
 parameters:
   server: 10.10.250.254

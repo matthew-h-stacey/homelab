@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: radarr
+  namespace: radarr
 spec:
   replicas: 1
   selector:
@@ -18,8 +19,8 @@ spec:
         image: busybox:latest # Use a lightweight image
         command: ['sh', '-c', 'chown -R 1000:1000 /config']
         volumeMounts:
-        - name: media
-          mountPath: /media
+        - name: movies
+          mountPath: /movies
         - name: config
           mountPath: /config
       containers:
@@ -28,14 +29,14 @@ spec:
         ports:
         - containerPort: 7878
         volumeMounts:
-        - name: media
-          mountPath: /media
+        - name: movies
+          mountPath: /movies
         - name: config
           mountPath: /config
       volumes:
-      - name: media
+      - name: movies
         persistentVolumeClaim:
-          claimName: pvc-radarr-media
+          claimName: pvc-radarr-movies
       - name: config
         persistentVolumeClaim:
           claimName: pvc-radarr-config
