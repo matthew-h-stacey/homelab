@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr
+  namespace: lidarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lidarr
+  template:
+    metadata:
+      labels:
+        app: lidarr
+    spec:
+      # Add the initContainers section
+      initContainers:
+      - name: init-permissions
+        image: busybox:latest # Use a lightweight image
+        command: ['sh', '-c', 'chown -R 1000:1000 /config']
+        volumeMounts:
+        - name: music
+          mountPath: /music
+        - name: config
+          mountPath: /config
+      containers:
+      - name: lidarr
+        image: lscr.io/linuxserver/lidarr
+        ports:
+        - containerPort: 8686
+        volumeMounts:
+        - name: music
+          mountPath: /music
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: music
+        persistentVolumeClaim:
+          claimName: pvc-nfs-lidarr-music
+      - name: config
+        persistentVolumeClaim:
+          claimName: pvc-nfs-lidarr-config
