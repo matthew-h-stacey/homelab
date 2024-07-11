@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-lh-sonarr-config
+  name: pvc-lh-lidarr-config
   namespace: lidarr
 spec:
   accessModes:

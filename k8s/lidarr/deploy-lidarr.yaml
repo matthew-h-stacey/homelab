@@ -39,4 +39,4 @@ spec:
           claimName: pvc-nfs-lidarr-music
       - name: config
         persistentVolumeClaim:
-          claimName: pvc-lh-sonarr-config
+          claimName: pvc-lh-lidarr-config
