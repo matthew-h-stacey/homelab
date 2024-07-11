@@ -39,4 +39,4 @@ spec:
           claimName: pvc-nfs-radarr-movies
       - name: config
         persistentVolumeClaim:
-          claimName: pvc-nfs-radarr-config
+          claimName: pvc-lh-radarr-config
