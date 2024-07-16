@@ -72,10 +72,10 @@ metadata:
   namespace: radarr
   annotations:
     kubernetes.io/ingress.class: "nginx"
-  spec:
-    tls:
+spec:
+  tls:
     - hosts:
-      - radarr.camelotlab.xyz
+        - radarr.camelotlab.xyz
       secretName: nginx-wildcard
   rules:
     - host: radarr.camelotlab.xyz
