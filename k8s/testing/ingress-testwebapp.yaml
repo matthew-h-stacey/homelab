@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - test-web.camelotlab.xyz
-    secretName: common-resources/nginx-wildcard
+    secretName: nginx-wildcard
   rules:
   - host: test-web.camelotlab.xyz
     http:
