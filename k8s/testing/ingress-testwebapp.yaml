@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - test-web.corp.camelotlab.xyz
+    - test-web.camelotlab.xyz
     secretName: common-resources/nginx-wildcard
   rules:
-  - host: test-web.corp.camelotlab.xyz
+  - host: test-web.camelotlab.xyz
     http:
       paths:
       - path: /
