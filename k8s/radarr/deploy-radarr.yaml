@@ -60,11 +60,34 @@ metadata:
   namespace: radarr
 spec:
   selector:
-    app: radarr # needs to match the metadata.labels.app or template.metadata.app name in deployment/pod yaml
-  type: NodePort
+    app: radarr 
   ports:
-    - port: 7878 # the local port the app is listening on
-      nodePort: 30082 # must be unique across the entire node pool
+    - port: 7878
+      nodePort: 30082
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-radarr
+  namespace: radarr
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  spec:
+    tls:
+    - hosts:
+      - radarr.camelotlab.xyz
+      secretName: nginx-wildcard
+  rules:
+    - host: radarr.camelotlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: radarr
+                port:
+                  number: 7878
 ---
 apiVersion: apps/v1
 kind: Deployment
