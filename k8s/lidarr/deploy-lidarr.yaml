@@ -83,7 +83,7 @@ spec:
               service:
                 name: lidarr
                 port:
-                  number: prowlarr
+                  number: 8686
 ---
 apiVersion: apps/v1
 kind: Deployment
