@@ -53,6 +53,18 @@ spec:
   volumeName: pv-nfs-sonarr-tv
   storageClassName: sc-nfs-sonarr-tv
 ---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+  namespace: radarr
+spec:
+  selector:
+    app: radarr 
+  ports:
+    - port: 7878
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
